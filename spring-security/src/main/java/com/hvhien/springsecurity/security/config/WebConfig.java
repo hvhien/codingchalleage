@@ -16,7 +16,8 @@ public class WebConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http.authorizeHttpRequests((authz)->{
-                authz.anyRequest().authenticated();
+                authz.requestMatchers("/apis/v1/check").permitAll()
+                        .anyRequest().authenticated();
             }).httpBasic(Customizer.withDefaults());
             return http.build();
     }
