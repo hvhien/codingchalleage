@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -22,6 +23,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   @Autowired
   private UserService userService;
+  @Autowired
+  PasswordEncoder passwordEncoder;
 
 
   @Override
@@ -31,8 +34,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     try{
       String jwt=getJwtFromRequest(request);
       if (StringUtils.hasText(jwt) && jwtProvider.validateJwt(jwt)){
-        Long userId=jwtProvider.getUserIdFromJwt(jwt);
-        UserDetails user=userService.loadById(userId);
+        String username=jwtProvider.getUsernameFromJwt(jwt);
+        UserDetails user=userService.loadUserByUsername(username);
         if (null != user){
           // TODO: 12/21/2023 check with password decoded
 

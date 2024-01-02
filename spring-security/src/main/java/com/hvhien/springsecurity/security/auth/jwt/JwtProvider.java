@@ -24,7 +24,7 @@ public class JwtProvider {
     Date now=new Date();
     Date expiryDate=new Date(now.getTime()+JWT_EXPIRATION);
     String jwt= Jwts.builder()
-            .setSubject(Long.toString(userDetail.getUserEntity().getId()))
+            .setSubject(userDetail.getUserEntity().getUsername())
             .setIssuedAt(now)
             .setExpiration(expiryDate)
             .signWith(SignatureAlgorithm.HS512,JWT_SECRET)
@@ -32,9 +32,9 @@ public class JwtProvider {
     return jwt;
   }
 
-  public Long getUserIdFromJwt(String token){
+  public String getUsernameFromJwt(String token){
     Claims claims=Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody();
-    return Long.parseLong(claims.getSubject());
+    return claims.getSubject();
   }
 
   public boolean validateJwt(String token){
