@@ -21,7 +21,6 @@ public class AuthApiController {
         return ResponseEntity.ok("OK1");
     }
     @GetMapping("/random")
-    @
     public ResponseEntity<String> checkauthen(){
         return ResponseEntity.ok("protected");
     }
