@@ -12,5 +12,5 @@ function dataType(){
     //complex types
     let obj={fistname:"hien",lastname:"ha",job:"Software Enginee",salary:'$2000'}; // object
     let printObject=(obj)=>{console.log(obj);} // function
-    functionVar(obj);
+    printObject(obj);
 }
