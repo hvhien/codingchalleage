@@ -36,3 +36,13 @@ let jsonStr=JSON.stringify(person);
 // '{"name":"hien","age":24,"job":"IT"}'
 let newPerson=JSON.parse(jsonStr);
 // {name: 'hien', age: 24, job: 'IT'}
+
+
+// some notes about object
+
+/**
+ * 1. Object is mutable, it can modify even when kind of object is const
+ * 2. Object can hold various data types, include other object and functions
+ * 3. Object dont have index for per key-value pair.
+ * 
+ */
